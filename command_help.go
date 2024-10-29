@@ -2,13 +2,15 @@ package main
 
 import "fmt"
 
-func help() {
-	fmt.Println("--------------------------------------------------")
-	fmt.Println("Welcome to the pokedexCLI!")
+func help() error {
+	availableCommands := getCommands()
+	fmt.Println("------------------------------------")
+	fmt.Println("Welcome to the Pokedex!")
 	fmt.Println("Here are the available commands:")
-	commands := getCommands()
-	for _, cmd := range commands {
-		fmt.Printf("%s : %s\n", cmd.name, cmd.description)
+	for _, cmd := range availableCommands {
+		fmt.Printf("-- %s: %s\n", cmd.name, cmd.description)
+
 	}
-	fmt.Println("--------------------------------------------------")
+	fmt.Println("------------------------------------")
+	return nil
 }

@@ -9,17 +9,15 @@ import (
 
 func startRepl() {
 	scanner := bufio.NewScanner(os.Stdin)
+
 	for {
-		fmt.Println("Pokedex> ")
-
+		fmt.Println("Pokedex>")
 		scanner.Scan()
-		text := scanner.Text()
-		cleanedText := cleanInput(text)
-		if len(cleanedText) == 0 {
-			continue
-		}
 
-		commandName := cleanedText[0]
+		text := scanner.Text()
+		cleaned := cleanInput(text)
+		commandName := cleaned[0]
+
 		availableCommands := getCommands()
 		command, ok := availableCommands[commandName]
 		if !ok {
@@ -33,7 +31,7 @@ func startRepl() {
 type cliCommand struct {
 	name        string
 	description string
-	callback    func()
+	callback    func() error
 }
 
 func getCommands() map[string]cliCommand {
@@ -45,7 +43,7 @@ func getCommands() map[string]cliCommand {
 		},
 		"help": {
 			name:        "help",
-			description: "Displays a list of available commands",
+			description: "Displays available commands",
 			callback:    help,
 		},
 	}
