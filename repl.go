@@ -28,27 +28,6 @@ func startRepl() {
 	}
 }
 
-type cliCommand struct {
-	name        string
-	description string
-	callback    func() error
-}
-
-func getCommands() map[string]cliCommand {
-	return map[string]cliCommand{
-		"exit": {
-			name:        "exit",
-			description: "Exit the Pokedex",
-			callback:    exit,
-		},
-		"help": {
-			name:        "help",
-			description: "Displays available commands",
-			callback:    help,
-		},
-	}
-}
-
 func cleanInput(str string) []string {
 	lowered := strings.ToLower(str)
 	words := strings.Fields(lowered)
