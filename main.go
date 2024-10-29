@@ -1,6 +1,6 @@
 package main
 
-import "github.com/samsamisamsam/pokedexapi/internal/pokeapi"
+import "github.com/samsamisamsam/pokedexcli/internal/pokeapi"
 
 func main() {
 	pokeapiClient := pokeapi.NewClient()
