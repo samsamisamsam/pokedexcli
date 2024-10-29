@@ -1,12 +1,13 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"net/http"
 )
 
 func mapCallback() error {
-	url := "https://pokeapi.co/api/v2/location/15/"
+	url := "https://pokeapi.co/api/v2/location-area/"
 
 	res, err := http.Get(url)
 	if err != nil {
@@ -15,41 +16,18 @@ func mapCallback() error {
 	}
 	defer res.Body.Close()
 
-	fmt.Println(res)
+	var LA LocationArea
+	json.Unmarshal(res, &LA)
 
 	return nil
 }
 
-/*
-type location struct {
-	id   int
-	name string
+type LocationArea struct {
+	Count    int    `json:"count"`
+	Next     string `json:"next"`
+	Previous any    `json:"previous"`
+	Results  []struct {
+		Name string `json:"name"`
+		URL  string `json:"url"`
+	} `json:"results"`
 }
-
-/*
-Location (type)
-Name	Description	Type
-
-id
-The identifier for this resource.
-integer
-
-name
-The name for this resource.
-string
-
-region
-The region this location can be found in.
-NamedAPIResource (Region)
-
-names
-The name of this resource listed in different languages.
-list Name
-
-game_indices
-A list of game indices relevent to this location by generation.
-list GenerationGameIndex
-
-areas
-Areas that can be found within this location.
-list NamedAPIResource (LocationArea) */
