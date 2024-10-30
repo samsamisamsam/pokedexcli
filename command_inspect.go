@@ -19,6 +19,7 @@ func inspectCallback(cfg *config, args ...string) error {
 	fmt.Printf("Name: %s\n", pokemon.Name)
 	fmt.Printf("Height: %v\n", pokemon.Height)
 	fmt.Printf("Weigt: %v\n", pokemon.Weight)
+	fmt.Println("Stats:")
 	for _, stat := range pokemon.Stats {
 		fmt.Printf("- %s: %v\n", stat.Stat.Name, stat.BaseStat)
 	}
