@@ -17,6 +17,10 @@ func startRepl(cfg *config) {
 		text := scanner.Text()
 		cleaned := cleanInput(text)
 		commandName := cleaned[0]
+		args := []string{}
+		if len(cleaned) > 1 {
+			args = cleaned[1:]
+		}
 
 		availableCommands := getCommands()
 		command, ok := availableCommands[commandName]
@@ -24,7 +28,7 @@ func startRepl(cfg *config) {
 			fmt.Println("invalid command")
 			continue
 		}
-		err := command.callback(cfg)
+		err := command.callback(cfg, args...)
 		if err != nil {
 			fmt.Println(err)
 		}

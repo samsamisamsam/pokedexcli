@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-func helpCallback(cfg *config) error {
+func helpCallback(cfg *config, s ...string) error {
 	availableCommands := getCommands()
 	fmt.Println("---------------------------------------------------------")
 	fmt.Println("Welcome to the Pokedex!")
