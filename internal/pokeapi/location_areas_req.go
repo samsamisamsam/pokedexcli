@@ -7,7 +7,7 @@ import (
 	"net/http"
 )
 
-func (c *Client) listLocationAreas() (LocationAreasResp, error) {
+func (c *Client) ListLocationAreas() (LocationAreasResp, error) {
 	endpoint := "/location-area"
 	fullURL := baseURL + endpoint
 

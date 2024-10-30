@@ -1,33 +1,19 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
-	"net/http"
+	"log"
 )
 
-func mapCallback() error {
-	url := "https://pokeapi.co/api/v2/location-area/"
-
-	res, err := http.Get(url)
+func mapCallback(cfg *config) error {
+	resp, err := cfg.pokeapiClient.ListLocationAreas()
 	if err != nil {
-		fmt.Println("error getting request: %w", err)
-		return err
+		log.Fatal(err)
 	}
-	defer res.Body.Close()
-
-	var LA LocationArea
-	json.Unmarshal(res, &LA)
+	fmt.Println("***LOCATIONS***")
+	for _, area := range resp.Results {
+		fmt.Printf("- %v\n", area.Name)
+	}
 
 	return nil
-}
-
-type LocationArea struct {
-	Count    int    `json:"count"`
-	Next     string `json:"next"`
-	Previous any    `json:"previous"`
-	Results  []struct {
-		Name string `json:"name"`
-		URL  string `json:"url"`
-	} `json:"results"`
 }
